@@ -4,25 +4,24 @@ Worker worker;
 Worker klaus = new Worker(400,300,255);
 Worker peter = new Worker(200,300,255); 
 
-int money;
+int money= 20;
 
 void setup() {
   size(600,600);
-  //frame.setResizable(true);
+  frameRate(30);
 }
 
 void draw(){
-  background(150);
+  background(250);
   peter.work();
   klaus.work();
-  
   money();
 }
 
-void money(){
-  if (peter.done() || klaus.done()){
-    money +=1;
-  }
+public void money(){
+  klaus.reward(1);
+  peter.reward(1);
+  fill(0);
   textAlign(CENTER);
-  text("You have "+money+" Dollar",width/2,50);
+  text("You have "+money+"$",width/2,50);
 }

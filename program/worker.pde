@@ -1,5 +1,10 @@
 class Worker {
-  float x,y,c,r,f,a;
+  float x,y,c,n,f,a;
+  float r = random(255);
+  float g = random(255);
+  float b = random(255);
+  float m = random(20,60); //motivation
+  int pocket;
   
   Worker (float _x, float _y, float _c) {
     x = _x;
@@ -9,25 +14,31 @@ class Worker {
   
   void work(){
   f=f+a;
-  if (f >=30){
+  if (f >=m){
     a=(-1);
   }
   else if (f==0) {
      a=1;
   }
-    r = map(f,0,30,0,3.1);
-    arc(x, y, 80, 80, 0, r, PIE);
+    n = map(f,0,m,0,3.1);
+    fill(r,g,b);
+    noStroke();
+    arc(x, y, 80, 80, 0, n, PIE);
   }
   
-  boolean done(){
-    if (r >=3){
-       println("Fertig");
-       return true;
-     }
-     else {
-     println("Nicht Fertig");
-     return false;
+  void reward(int p){
+    if (n >=3){
+     money +=5;
+     pocket+=p;
+     money-=p;
     }
+    myPocket();
+  }
+  
+  void myPocket() {
+    textAlign(CENTER);
+    fill(0);
+    text("I have "+pocket+"$ in my Pocket",x,y+80);
   }
   
 };
