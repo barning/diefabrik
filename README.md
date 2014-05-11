@@ -7,7 +7,7 @@ This program simulates the processes in a company. There is a manager and severa
 There is nothing to show. Please come back later.
 
 ##The plan
-I will exhibit an installation at the University of the Arts Bremen, which will illustrate the processes in a company. There will be a manager, the visitor, who has the ability to have control over the company (salary of the workers, breaks, working hours).
+I will exhibit an installation at the University of the Arts Bremen, which will illustrate the processes in a company. There will be a manager, represented by the visitor of the installation, who takes control over the company (salary of the workers, breaks, working hours).
 
 The workers have different personalities (performance, motivation) and respond to the manager. This creates different situations wich will lead to good or bad impacts on the entire company.
 
