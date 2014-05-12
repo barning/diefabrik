@@ -31,8 +31,6 @@ void draw(){
   
   money();
 }
-
-
 void money(){
   telekom.getProduct(3);
   bernd.isPayday();
