@@ -2,11 +2,11 @@ Manager manager;
 Worker worker;
 Customer customer;
 
-Worker klaus = new Worker(400,130);
-Worker peter = new Worker(250,130);
+Worker klaus = new Worker(500,130);
+Worker peter = new Worker(300,130);
 Worker hans = new Worker(100,130);
-Worker dieter = new Worker(550,130);
-Worker gerhard = new Worker(700,130);
+Worker dieter = new Worker(700,130);
+Worker gerhard = new Worker(900,130);
 
 Customer telekom = new Customer();
 
@@ -17,18 +17,14 @@ boolean payday = false;
 int money;
 
 void setup() {
-  size(830,300);
+  size(1024,700);
   frameRate(30);
 }
 
 void draw(){
   background(250);
-  peter.work();
-  klaus.work();
-  hans.work();
-  dieter.work();
-  gerhard.work();
-  
+  bernd.advise();
+  bernd.showStats();
   money();
 }
 void money(){
