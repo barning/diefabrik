@@ -1,4 +1,9 @@
+import controlP5.*;
+
+ControlP5 cp5;
+
 Manager manager;
+
 Worker worker;
 Customer customer;
 
@@ -15,16 +20,21 @@ Manager bernd = new Manager();
 boolean payday = false;
 
 int money;
+int sliderMoney;
 
 void setup() {
   size(1024,700);
-  frameRate(30);
+  cp5 = new ControlP5(this);
+  cp5.addSlider("sliderMoney")
+  .setPosition(85,height/2)
+  .setSize(20,100)
+  .setRange(0,50)
+  .setNumberOfTickMarks(5); 
 }
 
 void draw(){
-  background(250);
+  background(#2c3e50);
   bernd.advise();
-  bernd.showStats();
   money();
 }
 void money(){

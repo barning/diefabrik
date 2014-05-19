@@ -5,12 +5,10 @@ class Worker {
   float g = random(255);
   float b = random(255);
   
-  //motivation
-  int m = 255;
-  //tiredness
-  float t = random(100);
   //exaustion
-  float e=random(100);
+  int e = 255;
+  //motivation
+  int m=round(random(150,255));
   //tempo
   int tempo=round(random(1,10));
   
@@ -25,42 +23,45 @@ class Worker {
   
   void work(){
     
-   if (m>=50){ //solange moti über 50
-    f=f+a;     //
+   if (m>=40){ //solange moti über 40
+    f=f+a;
     if (f >=180){
       a=(tempo*-1);
     }
     else if (f==0) {
      a=tempo;
    }
-   }
-   if (done){
-     m-=5;
-   }
-   n = map(f,0,180,0,50);
-   
-   fill(r,g,b,m);
-   noStroke();
-   ellipse(x,y,n,n);   
-   textAlign(CENTER);
-   fill(0);
-   text("I have "+pocket+"$ in my Pocket",x,y+80);
-   motivation();
+ }
+ if (done){
+   m-=6;
+ }
+ n = map(f,0,180,0,50);
+ 
+ fill(r,g,b,m);
+ noStroke();
+ ellipse(x,y,n,n);   
+ textAlign(CENTER);
+ fill(255);
+ text("I have "+pocket+"$ in my Pocket",x,y+80);
+ text("Tempo "+tempo,x,height-200);
+ text("Motivation "+m,x,height-180);
+ text("Exaustion "+e,x,height-160);
+   //motivation();
  }
  
  void reward(){
-    if (f >=180){
-     done =true;
-    }
-    else {
-      done = false;
-    }
+  if (f >=180){
+   done =true;
+ }
+ else {
+  done = false;
+}
 }
 
 void myPocket(int r) {
   money-=r;
   pocket+=r;
-  m+=5;
+  m+=r*2;
 }
 
 void motivation(){
