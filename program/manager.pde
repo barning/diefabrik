@@ -1,7 +1,8 @@
-class Manager { int money;
- int sliderMoney;
+class Manager { 
+
  void isPayday(){ 
   if (second()==59) {
+    println("payday");
     klaus.myPocket(sliderMoney);
     peter.myPocket(sliderMoney);
     hans.myPocket(sliderMoney);
