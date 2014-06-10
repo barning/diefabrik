@@ -1,5 +1,5 @@
 import controlP5.*;
-
+PFont font;
 ControlP5 cp5;
 
 Manager manager;
@@ -7,11 +7,11 @@ Manager manager;
 Worker worker;
 Customer customer;
 
-Worker klaus = new Worker(500,130);
-Worker peter = new Worker(300,130);
-Worker hans = new Worker(100,130);
-Worker dieter = new Worker(700,130);
-Worker gerhard = new Worker(900,130);
+Worker klaus = new Worker(560,0);
+Worker peter = new Worker(290,0);
+Worker hans = new Worker(20,0);
+Worker dieter = new Worker(20,150);
+Worker gerhard = new Worker(290,150);
 
 Customer telekom = new Customer();
 
@@ -23,19 +23,26 @@ int money;
 int sliderMoney;
 
 void setup() {
-  size(1024,700);
-  cp5 = new ControlP5(this);
-  cp5.addSlider("sliderMoney")
-  .setPosition(85,height/2)
-  .setSize(20,100)
-  .setRange(0,50)
-  .setNumberOfTickMarks(5); 
+  size(830,768);
+  font = loadFont("FiraSansOT-Bold-20.vlw");
+  textFont(font, 20);
+      cp5 = new ControlP5(this);
+    cp5.addSlider("sliderMoney")
+    .setPosition(85,height/2)
+    .setSize(20,100)
+    .setRange(0,50)
+    .setNumberOfTickMarks(5); 
+    cp5.hide();
 }
 
 void draw(){
-  background(#2c3e50);
+  background(255);
+  println(mouseX,mouseY);
   bernd.advise();
   money();
+  fill(0);
+  textAlign(CENTER);
+  text("The Factory has "+money+"$",width/2,height-100);
 }
 void money(){
   telekom.getProduct(3);
@@ -44,8 +51,6 @@ void money(){
   peter.reward();
   hans.reward();
   dieter.reward();
-  gerhard.reward();   
-  fill(0);
-  textAlign(CENTER);
-  text("You have "+money+"$",width/2,50);
-}
+  gerhard.reward(); 
+  
+};
