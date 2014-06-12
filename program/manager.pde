@@ -1,7 +1,7 @@
 class Manager { 
 
   void isPayday(){ 
-    if (second()==59) {
+    if (second()==5) {
       println("payday");
       klaus.myPocket(sliderMoney);
       peter.myPocket(sliderMoney);

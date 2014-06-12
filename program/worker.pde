@@ -65,6 +65,9 @@ class Worker {
  else if (m>=80){
    text("I don't like this work!",10,110);
  }
+ else {
+   text("FUCK THIS!",10,110);
+ }
  
   text("Exaustion "+e,10,140);
   popMatrix();
