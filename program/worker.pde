@@ -9,12 +9,17 @@ class Worker {
   //motivation
   int m=255;
   //tempo
-  int tempo=round(random(1,10));
+  int tempo=round(random(1,5));
   int pocket;
   boolean done = false;
-  Worker (float _x, float _y) {
+  
+  int pos;
+  int servo;
+  
+  Worker (float _x, float _y, int servo_) {
     x=_x;
     y=_y;
+    servo = servo_;
   }
   
   void initial(){
@@ -33,10 +38,19 @@ class Worker {
  if (done){
    m-=6;
  }
- 
- n = map(f,0,180,0,50);
+
+ if (f>=180){
+   done =true;
+ }
+ else {
+   done =false;
+ }
+ pos = round(f);
+ //n = map(f,0,180,0,50);
+ pos= round(f);
  fill(r,g,b,m);
  //ellipse(x,y,n,n);
+ arduino.servoWrite(servo, pos);
  noFill();
  strokeWeight(5);
  pushMatrix();
