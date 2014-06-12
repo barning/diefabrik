@@ -1,6 +1,5 @@
 import processing.serial.*;
 import cc.arduino.*;
-
 Arduino arduino;
 
 import controlP5.*;
@@ -31,20 +30,20 @@ void setup() {
   size(830,768);
   font = loadFont("FiraSansOT-Bold-20.vlw");
   textFont(font, 20);
-      cp5 = new ControlP5(this);
-    cp5.addSlider("sliderMoney")
-    .setPosition(85,height/2)
-    .setSize(20,100)
-    .setRange(0,50)
-    .setNumberOfTickMarks(5); 
-    cp5.hide();
-    
-    println(Arduino.list());
-    arduino = new Arduino(this, Arduino.list()[7], 57600);
-    arduino.pinMode(7, Arduino.SERVO);
-    arduino.pinMode(6, Arduino.SERVO);
-    arduino.pinMode(5, Arduino.SERVO);
-    arduino.pinMode(4, Arduino.SERVO);
+  cp5 = new ControlP5(this);
+  cp5.addSlider("sliderMoney")
+  .setPosition(85,height/2)
+  .setSize(20,100)
+  .setRange(0,50)
+  .setNumberOfTickMarks(5); 
+  cp5.hide();
+  
+  println(Arduino.list());
+  arduino = new Arduino(this, Arduino.list()[7], 57600);
+  arduino.pinMode(7, Arduino.SERVO);
+  arduino.pinMode(6, Arduino.SERVO);
+  arduino.pinMode(5, Arduino.SERVO);
+  arduino.pinMode(4, Arduino.SERVO);
 }
 
 void draw(){
