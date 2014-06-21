@@ -1,6 +1,13 @@
+import de.looksgood.ani.*;
+import de.looksgood.ani.easing.*;
+
+Ani aniX1,aniY1,aniX2,aniY2,aniX3,aniY3;
+
 import processing.serial.*;
 import cc.arduino.*;
 Arduino arduino;
+
+PVector v1,v2,v3,v4;
 
 import controlP5.*;
 PFont font;
@@ -44,6 +51,11 @@ void setup() {
   arduino.pinMode(6, Arduino.SERVO);
   arduino.pinMode(5, Arduino.SERVO);
   arduino.pinMode(4, Arduino.SERVO);
+  
+  v1 = new PVector(width/2, height/2);
+  v2 = new PVector(width/2, height/2);
+  v3 = new PVector(width/2, height/2);
+  v4 = new PVector(width/2, height/2);
 }
 
 void draw(){

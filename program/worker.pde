@@ -4,10 +4,11 @@ class Worker {
   float r = random(255);
   float g = random(255);
   float b = random(255);
+  
   //exaustion
   int e = 255;
   //motivation
-  int m=255;
+  int m=round(random(100,255));
   //tempo
   int tempo=round(random(1,5));
   int pocket;
@@ -22,6 +23,12 @@ class Worker {
     servo = servo_;
   }
   void work(){
+    beginShape();
+    vertex(v1.x,v1.y);
+    vertex(v2.x,v2.y);
+    vertex(v3.x,v3.y);
+    vertex(v4.x,v4.y);
+    endShape(CLOSE);
    if (m>=40){ //solange moti über 40
     f=f+a;
     if (f >=180){
@@ -43,11 +50,10 @@ class Worker {
    done =false;
  }
  
- fill(r,g,b,m);
- //ellipse(x,y,n,n);
+ ellipse(x,y,n,n);
  pos= round(f);
- arduino.servoWrite(servo, pos);
- noFill();
+ //arduino.servoWrite(servo, pos);
+ fill(r,g,b,m);
  strokeWeight(5);
  pushMatrix();
  translate(x, y);
@@ -72,7 +78,7 @@ class Worker {
   text("Exaustion "+e,10,140);
   popMatrix();
   //motivation();
-  mouseHover();
+  mouseInteraction();
  }
  
  void reward(){
@@ -102,7 +108,7 @@ void motivation(){
   }
 }
 
-void mouseHover(){
+void mouseInteraction(){
   if (mouseX>=x && mouseX<=x+250 && mouseY>=y+40 && mouseY<=y+130+40){
     pushMatrix();
     translate(x, y);

@@ -10,7 +10,6 @@ class Manager {
       gerhard.myPocket(sliderMoney);
     }
   }
-
   void advise(){
     peter.work();
     klaus.work();
