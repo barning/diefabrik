@@ -7,8 +7,6 @@ import processing.serial.*;
 import cc.arduino.*;
 Arduino arduino;
 
-PVector v1,v2,v3,v4;
-
 import controlP5.*;
 PFont font;
 ControlP5 cp5;
@@ -18,11 +16,13 @@ Manager manager;
 Worker worker;
 Customer customer;
 
-Worker klaus = new Worker(560,0,7);
-Worker peter = new Worker(290,0,6);
-Worker hans = new Worker(20,0,5);
-Worker dieter = new Worker(20,150,4);
-Worker gerhard = new Worker(290,150,3);
+Worker worker1 = new Worker(1,560,0,7);
+Worker worker2 = new Worker(2,290,0,6);
+Worker worker3 = new Worker(3,20,0,5);
+Worker worker4 = new Worker(4,20,190,4);
+Worker worker5 = new Worker(5,290,190,3);
+boolean infolayer=false;
+int layer=0;
 
 Customer telekom = new Customer();
 
@@ -36,6 +36,7 @@ int sliderMoney;
 void setup() {
   size(830,768);
   font = loadFont("FiraSansOT-Bold-20.vlw");
+  font = loadFont("FiraSansOT-Bold-48.vlw");
   textFont(font, 20);
   cp5 = new ControlP5(this);
   cp5.addSlider("sliderMoney")
@@ -45,34 +46,30 @@ void setup() {
   .setNumberOfTickMarks(5); 
   cp5.hide();
   
-  println(Arduino.list());
+  /*println(Arduino.list());
   arduino = new Arduino(this, Arduino.list()[7], 57600);
   arduino.pinMode(7, Arduino.SERVO);
   arduino.pinMode(6, Arduino.SERVO);
   arduino.pinMode(5, Arduino.SERVO);
-  arduino.pinMode(4, Arduino.SERVO);
-  
-  v1 = new PVector(width/2, height/2);
-  v2 = new PVector(width/2, height/2);
-  v3 = new PVector(width/2, height/2);
-  v4 = new PVector(width/2, height/2);
+  arduino.pinMode(4, Arduino.SERVO);*/
 }
 
 void draw(){
-  background(255);
+  background(#e6e6e6);
   bernd.advise();
   money();
   fill(0);
   textAlign(CENTER);
+  textSize(20);
   text("The Factory has "+money+"$",width/2,height-100);
 }
 void money(){
   telekom.getProduct(3);
   bernd.isPayday();
-  klaus.reward();
-  peter.reward();
-  hans.reward();
-  dieter.reward();
-  gerhard.reward(); 
+  worker1.reward();
+  worker2.reward();
+  worker3.reward();
+  worker4.reward();
+  worker5.reward();
   
 };

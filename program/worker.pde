@@ -1,12 +1,15 @@
 class Worker {
   float x,y,c,n,f,a;
-  //Farbe
-  float r = random(255);
-  float g = random(255);
-  float b = random(255);
+  String[] names = {
+    "Dieter","Peter","Bernd",
+    "Rüdiger","Klaus","Heinz",
+    "Klaas","Wilfried","Stefan",
+    "Günther","Fiedrich","Gerhard",
+  };
+  int index;
   
   //exaustion
-  int e = 255;
+  int e = int(random(10));
   //motivation
   int m=round(random(100,255));
   //tempo
@@ -17,19 +20,15 @@ class Worker {
   int pos;
   int servo;
   
-  Worker (float _x, float _y, int servo_) {
+  Worker (int name_,float _x, float _y, int servo_) {
     x=_x;
     y=_y;
     servo = servo_;
+    index=name_;
   }
-  void work(){
-    beginShape();
-    vertex(v1.x,v1.y);
-    vertex(v2.x,v2.y);
-    vertex(v3.x,v3.y);
-    vertex(v4.x,v4.y);
-    endShape(CLOSE);
-   if (m>=40){ //solange moti über 40
+  void calculate(){
+
+   if (m>=0 && e<=255){ //wenn motivation über 40 und die exhaustion zu viel
     f=f+a;
     if (f >=180){
       a=(tempo*-1);
@@ -39,7 +38,8 @@ class Worker {
    }
  }
  if (done){
-   m-=6;
+   e+=4;
+   m-=2;
  }
  
  if (f>=180){
@@ -49,35 +49,36 @@ class Worker {
  else {
    done =false;
  }
+ }
+ void showWork(){
+ //Motivation umrechen für Balken
+ float m1 = map(m,0,255,130,40);
+ float m2 = map(m,0,255,40,130);
  
- ellipse(x,y,n,n);
- pos= round(f);
+ //Tempo umrechnen für Balken
+ float t1 = map(tempo,1,5,130,40);
+ float t2 = map(tempo,1,5,40,130);
+ 
+ //Exhaustion umrechnen für Balken
+ float e1 = map(e,0,255,130,40);
+ float e2 = map(e,0,255,40,130);
+ 
+ pos= int(f);
  //arduino.servoWrite(servo, pos);
- fill(r,g,b,m);
- strokeWeight(5);
+ 
+ noStroke();
  pushMatrix();
  translate(x, y);
- rect(0,40,250,130);
- textAlign(LEFT);
- fill(0);
- text("I have "+pocket+"$ in my Pocket",10,80);
- 
- if (m>=210){
-   text("I am motivated",10,110);
- }
- else if (m>=110){
-   text("This is boring…",10,110);
- }
- else if (m>=80){
-   text("I don't like this work!",10,110);
- }
- else {
-   text("FUCK THIS!",10,110);
- }
- 
-  text("Exaustion "+e,10,140);
+  fill(#719f9a);
+    rect(0,m1,75,m2);
+  fill(#efc639);
+    rect(87,t1,75,t2);
+  fill(#f25e59);
+    rect(174,e1,75,e2);
+  textAlign(CENTER);
+  fill(0);
+  text(names[index],250/2,200);
   popMatrix();
-  //motivation();
   mouseInteraction();
  }
  
@@ -96,29 +97,48 @@ class Worker {
    m+=r*2;
  }
 
-void motivation(){
-  rect(x,y+120,90,20);
-  fill(255);
-  rectMode(CENTER);
-  text("MOTIVATE!",x,y+123);
-  if (mouseX>=x-90 && mouseX<=x+90 && mouseY>=y+120 && mouseY<=y+120+20 && mousePressed){
-    fill(r,g,b);
-    rect(x,y+120,90,20);
-    tempo+=1;
-  }
-}
-
 void mouseInteraction(){
   if (mouseX>=x && mouseX<=x+250 && mouseY>=y+40 && mouseY<=y+130+40){
     pushMatrix();
     translate(x, y);
-    fill(255,0,0,230);
+    fill(#547bd2);
     rect(0,40,250,130);
     fill(255);
     textAlign(CENTER);
-    text("Alter my Contract",250/2,110);
+    textSize(20);
+    text("Show more Information",250/2,110);
     popMatrix();
+    if (mousePressed){
+      infolayer=true;
+      layer=index;
+  }
   }
 }
 
+void moreInfo(){
+  translate(0,0);
+  background(#e6e6e6);
+  textFont(font, 48);
+  textAlign(LEFT);
+  textSize(42);
+  text("Hi, I'm "+names[index],10,50);
+    fill(#719f9a);
+      text("My Motivation is at "+m,10,100);
+    fill(#efc639);
+      text("My Tempo is "+tempo,10,150);
+    fill(#f25e59);
+      text("My Exhaustion is at "+e,10,200);
+  if(mouseX>=width-60 && mouseX<=(width-60)+80 && mouseY>=0 && mouseY <=60){
+    fill(255);
+    text("x",width-50,40);
+  if (mousePressed)
+  {
+    infolayer=false;
+  }
+  }
+  else {
+    fill(0);
+    text("x",width-50,40);
+  }
+}
 };
