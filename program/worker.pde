@@ -87,11 +87,11 @@ class Worker {
  noStroke();
  pushMatrix();
  translate(x, y);
-  fill(#719f9a);
+  fill(#03a9f4);
     rect(0,m1,75,m2);
-  fill(#efc639);
+  fill(#ff5722);
     rect(87,t1,75,t2);
-  fill(#f25e59);
+  fill(#259b24);
     rect(174,e1,75,e2);
   textAlign(CENTER);
  if (tooTired){
@@ -123,7 +123,7 @@ void mouseInteraction(){
   if (mouseX>=x && mouseX<=x+250 && mouseY>=y+40 && mouseY<=y+130+40){
     pushMatrix();
     translate(x, y);
-    fill(#547bd2);
+    fill(#ff5177);
     rect(0,40,250,130);
     fill(255);
     textAlign(CENTER);
@@ -148,13 +148,13 @@ void moreInfo(){
   
 //***General Infos****//
   text("Hi, I'm "+names[index],10,50);
-    fill(#719f9a);
+    fill(#03a9f4);
       text("My Motivation is at "+m,10,100);
-    fill(#efc639);
+    fill(#ff5722);
       text("My Tempo is "+tempo,10,150);
-    fill(#f25e59);
+    fill(#259b24);
       text("My Exhaustion is at "+e,10,200);
-    fill(#00b6ea);
+    fill(#00bcd4);
       text("I have "+pocket+" in my Pocket",10,250);
       
 //**Control Infos**//
@@ -164,7 +164,7 @@ void moreInfo(){
 //**This closes the Layer**//
   if(mouseX>=width-60 && mouseX<=(width-60)+80 && mouseY>=0 && mouseY <=60){
     textSize(42);
-    fill(255);
+    fill(#bdbdbd);
     text("x",width-50,40);
   if (mousePressed)
   {
