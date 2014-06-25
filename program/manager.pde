@@ -3,11 +3,11 @@ class Manager {
   void isPayday(){ 
     if (second()==5) {
       println("payday");
-      worker1.myPocket(sliderMoney);
-      worker2.myPocket(sliderMoney);
-      worker3.myPocket(sliderMoney);
-      worker4.myPocket(sliderMoney);
-      worker5.myPocket(sliderMoney);
+      worker1.myPocket(sliderMoney1);
+      worker2.myPocket(sliderMoney2);
+      worker3.myPocket(sliderMoney3);
+      worker4.myPocket(sliderMoney4);
+      worker5.myPocket(sliderMoney5);
     }
   }
   void advise(){

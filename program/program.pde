@@ -31,7 +31,8 @@ Manager bernd = new Manager();
 boolean payday = false;
 
 int money;
-int sliderMoney;
+int sliderMoney1,sliderMoney2,sliderMoney3,
+    sliderMoney4,sliderMoney5;
 
 void setup() {
   size(830,768);
@@ -39,12 +40,11 @@ void setup() {
   font = loadFont("FiraSansOT-Bold-48.vlw");
   textFont(font, 20);
   cp5 = new ControlP5(this);
-  cp5.addSlider("sliderMoney")
-  .setPosition(85,height/2)
-  .setSize(20,100)
-  .setRange(0,50)
-  .setNumberOfTickMarks(5); 
-  cp5.hide();
+  worker1.init();
+  worker2.init();
+  worker3.init();
+  worker4.init();
+  worker5.init();
   
   /*println(Arduino.list());
   arduino = new Arduino(this, Arduino.list()[7], 57600);
@@ -55,13 +55,14 @@ void setup() {
 }
 
 void draw(){
-  background(#e6e6e6);
+  //background(#e6e6e6);
+  background(255);
   bernd.advise();
   money();
   fill(0);
   textAlign(CENTER);
   textSize(20);
-  text("The Factory has "+money+"$",width/2,height-100);
+  text("The Factory has "+money+"$",width/2,height-50);
 }
 void money(){
   telekom.getProduct(3);

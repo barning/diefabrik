@@ -7,6 +7,7 @@ class Worker {
     "Günther","Fiedrich","Gerhard",
   };
   int index;
+  boolean tooTired =false;
   
   //exaustion
   int e = int(random(10));
@@ -26,8 +27,25 @@ class Worker {
     servo = servo_;
     index=name_;
   }
+  
+  void init(){
+  cp5.addSlider("sliderMoney"+index)
+    .setPosition(100,height-400)
+    .setSize(80,300)
+    .setRange(0,5)
+    .setNumberOfTickMarks(5)
+    .setColorBackground(0)
+    .showTickMarks(false);
+    //.setColorLabel(255);
+  cp5.getController("sliderMoney"+index).hide();
+  }
   void calculate(){
-
+    if (e>=255){
+      tooTired=true;
+    }
+    if (m>=255){
+      m=255;
+    }
    if (m>=0 && e<=255){ //wenn motivation über 40 und die exhaustion zu viel
     f=f+a;
     if (f >=180){
@@ -76,6 +94,10 @@ class Worker {
   fill(#f25e59);
     rect(174,e1,75,e2);
   textAlign(CENTER);
+ if (tooTired){
+  fill(255,255,255,200);
+  rect(0,40,250,130);
+ }
   fill(0);
   text(names[index],250/2,200);
   popMatrix();
@@ -92,9 +114,9 @@ class Worker {
  }
  
  void myPocket(int r) {
-   money-=r;
-   pocket+=r;
-   m+=r*2;
+   money-=r/frameRate;
+   pocket+=r/frameRate;
+   m+=r/frameRate;
  }
 
 void mouseInteraction(){
@@ -117,10 +139,14 @@ void mouseInteraction(){
 
 void moreInfo(){
   translate(0,0);
-  background(#e6e6e6);
+  //background(#e6e6e6);
+  background(255);
   textFont(font, 48);
   textAlign(LEFT);
   textSize(42);
+  cp5.getController("sliderMoney"+index).show();
+  
+//***General Infos****//
   text("Hi, I'm "+names[index],10,50);
     fill(#719f9a);
       text("My Motivation is at "+m,10,100);
@@ -128,15 +154,26 @@ void moreInfo(){
       text("My Tempo is "+tempo,10,150);
     fill(#f25e59);
       text("My Exhaustion is at "+e,10,200);
+    fill(#00b6ea);
+      text("I have "+pocket+" in my Pocket",10,250);
+      
+//**Control Infos**//
+  textSize(20);
+  fill(0);
+  text("I earn "+round(cp5.getController("sliderMoney"+index).getValue())+"$ per hour",200,500);
+//**This closes the Layer**//
   if(mouseX>=width-60 && mouseX<=(width-60)+80 && mouseY>=0 && mouseY <=60){
+    textSize(42);
     fill(255);
     text("x",width-50,40);
   if (mousePressed)
   {
     infolayer=false;
+    cp5.getController("sliderMoney"+index).hide();
   }
   }
   else {
+    textSize(42);
     fill(0);
     text("x",width-50,40);
   }
