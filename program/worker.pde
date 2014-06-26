@@ -82,7 +82,7 @@ class Worker {
  float e2 = map(e,0,255,40,130);
  
  pos= int(f);
- //arduino.servoWrite(servo, pos);
+ arduino.servoWrite(servo, pos);
  
  noStroke();
  pushMatrix();
@@ -114,9 +114,9 @@ class Worker {
  }
  
  void myPocket(int r) {
-   money-=r/frameRate;
-   pocket+=r/frameRate;
-   m+=r/frameRate;
+   money-=r;
+   pocket+=r;
+   m+=r;
  }
 
 void mouseInteraction(){
