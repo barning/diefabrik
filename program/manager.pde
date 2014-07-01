@@ -11,11 +11,11 @@ class Manager {
     }
   }
   void advise(){
-    worker1.calculate();
-    worker2.calculate();
-    worker3.calculate();
-    worker4.calculate();
-    worker5.calculate();
+    worker1.work();
+    worker2.work();
+    worker3.work();
+    worker4.work();
+    worker5.work();
    if (infolayer == false){
     worker1.showWork();
     worker2.showWork();

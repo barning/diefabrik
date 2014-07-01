@@ -10,6 +10,8 @@ Arduino arduino;
 import controlP5.*;
 PFont font;
 ControlP5 cp5;
+Slider slider;
+CheckBox checkbox;
 
 Manager manager;
 
@@ -33,7 +35,6 @@ boolean payday = false;
 int money;
 int sliderMoney1,sliderMoney2,sliderMoney3,
     sliderMoney4,sliderMoney5;
-
 void setup() {
   size(830,768);
   font = loadFont("FiraSansOT-Bold-20.vlw");
@@ -46,12 +47,13 @@ void setup() {
   worker4.init();
   worker5.init();
   
-  println(Arduino.list());
+  /*
   arduino = new Arduino(this, Arduino.list()[7], 57600);
   arduino.pinMode(7, Arduino.SERVO);
   arduino.pinMode(6, Arduino.SERVO);
   arduino.pinMode(5, Arduino.SERVO);
   arduino.pinMode(4, Arduino.SERVO);
+  */
 }
 
 void draw(){

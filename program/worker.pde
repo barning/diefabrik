@@ -8,6 +8,7 @@ class Worker {
   };
   int index;
   boolean tooTired =false;
+  boolean pause =false;
   
   //exaustion
   int e = int(random(10));
@@ -29,19 +30,43 @@ class Worker {
   }
   
   void init(){
-  cp5.addSlider("sliderMoney"+index)
+  slider = cp5.addSlider("sliderMoney"+index)
     .setPosition(100,height-400)
     .setSize(80,300)
     .setRange(0,5)
     .setNumberOfTickMarks(5)
     .setColorBackground(0)
     .showTickMarks(false);
-    //.setColorLabel(255);
-  cp5.getController("sliderMoney"+index).hide();
+    
+  checkbox = cp5.addCheckBox("checkBox"+index)
+                .setPosition(500, height-400)
+                .setColorForeground(color(120))
+                .setColorActive(color(255))
+                .setColorLabel(color(255))
+                .setSize(40, 40)
+                .setItemsPerRow(3)
+                .setSpacingColumn(30)
+                .setSpacingRow(20)
+                .addItem("1"+index, 0)
+                .addItem("2"+index, 50)
+                .addItem("3"+index, 100)
+                .addItem("4"+index, 150)
+                .addItem("5"+index, 200)
+                .addItem("6"+index, 255)
+                ;
+                
+    
+    cp5.getGroup(checkbox.getName()).hide();
+    cp5.getController("sliderMoney"+index).hide();
+    println(checkbox.getName());
   }
-  void calculate(){
+  
+  void work(){
     if (e>=255){
       tooTired=true;
+    }
+    if (pause){
+      e--;
     }
     if (m>=255){
       m=255;
@@ -67,6 +92,8 @@ class Worker {
  else {
    done =false;
  }
+ pos= int(f);
+ //arduino.servoWrite(servo, pos);
  }
  void showWork(){
  //Motivation umrechen für Balken
@@ -80,10 +107,7 @@ class Worker {
  //Exhaustion umrechnen für Balken
  float e1 = map(e,0,255,130,40);
  float e2 = map(e,0,255,40,130);
- 
- pos= int(f);
- arduino.servoWrite(servo, pos);
- 
+
  noStroke();
  pushMatrix();
  translate(x, y);
@@ -145,6 +169,7 @@ void moreInfo(){
   textAlign(LEFT);
   textSize(42);
   cp5.getController("sliderMoney"+index).show();
+  cp5.getGroup(checkbox.getName()).show();
   
 //***General Infos****//
   text("Hi, I'm "+names[index],10,50);
@@ -170,6 +195,7 @@ void moreInfo(){
   {
     infolayer=false;
     cp5.getController("sliderMoney"+index).hide();
+    cp5.getGroup(checkbox.getName()).hide();
   }
   }
   else {
