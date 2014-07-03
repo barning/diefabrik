@@ -54,7 +54,7 @@ class Worker {
                 ;
                 
     
-    cp5.getGroup(checkbox.getName()).hide();
+    cp5.getGroup("checkBox"+index).hide();
     cp5.getController("sliderMoney"+index).hide();
   }
   
@@ -65,6 +65,7 @@ class Worker {
     if (pause){
       e--;
     }
+    
     if (m>=255){
       m=255;
     }
@@ -166,7 +167,7 @@ void moreInfo(){
   textAlign(LEFT);
   textSize(42);
   cp5.getController("sliderMoney"+index).show();
-  cp5.getGroup(checkbox.getName()).show();
+  cp5.getGroup("checkBox"+index).show();
   
 //***General Infos****//
   text("Hi, I'm "+names[index],10,50);
@@ -192,7 +193,7 @@ void moreInfo(){
   {
     infolayer=false;
     cp5.getController("sliderMoney"+index).hide();
-    cp5.getGroup(checkbox.getName()).hide();
+    cp5.getGroup("checkBox"+index).hide();
   }
   }
   else {
