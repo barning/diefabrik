@@ -1,13 +1,14 @@
 class Manager { 
-
+int lastTime = 0;
   void isPayday(){ 
-    if (second()==5) {
+    if( millis() - lastTime >= 60000){
       println("payday");
       worker1.myPocket(sliderMoney1);
       worker2.myPocket(sliderMoney2);
       worker3.myPocket(sliderMoney3);
       worker4.myPocket(sliderMoney4);
       worker5.myPocket(sliderMoney5);
+      lastTime = millis();
     }
   }
   void advise(){

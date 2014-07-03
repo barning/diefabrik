@@ -40,25 +40,22 @@ class Worker {
     
   checkbox = cp5.addCheckBox("checkBox"+index)
                 .setPosition(500, height-400)
-                .setColorForeground(color(120))
-                .setColorActive(color(255))
+                .setColorForeground(color(0))
+                .setColorBackground(color(0))
+                .setColorActive(color(#03a9f4))
                 .setColorLabel(color(255))
                 .setSize(40, 40)
-                .setItemsPerRow(3)
-                .setSpacingColumn(30)
+                .setItemsPerRow(1)
+                .setSpacingColumn(80)
                 .setSpacingRow(20)
                 .addItem("1"+index, 0)
                 .addItem("2"+index, 50)
                 .addItem("3"+index, 100)
-                .addItem("4"+index, 150)
-                .addItem("5"+index, 200)
-                .addItem("6"+index, 255)
                 ;
                 
     
     cp5.getGroup(checkbox.getName()).hide();
     cp5.getController("sliderMoney"+index).hide();
-    println(checkbox.getName());
   }
   
   void work(){
@@ -180,12 +177,12 @@ void moreInfo(){
     fill(#259b24);
       text("My Exhaustion is at "+e,10,200);
     fill(#00bcd4);
-      text("I have "+pocket+" in my Pocket",10,250);
+      text("I have "+pocket+"$ in my Pocket",10,250);
       
 //**Control Infos**//
   textSize(20);
   fill(0);
-  text("I earn "+round(cp5.getController("sliderMoney"+index).getValue())+"$ per hour",200,500);
+  text("I earn "+round(cp5.getController("sliderMoney"+index).getValue())+"$ per minute",200,500);
 //**This closes the Layer**//
   if(mouseX>=width-60 && mouseX<=(width-60)+80 && mouseY>=0 && mouseY <=60){
     textSize(42);
