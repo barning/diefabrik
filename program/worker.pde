@@ -8,7 +8,7 @@ class Worker {
   };
   int index;
   boolean tooTired =false;
-  boolean pause =false;
+  boolean pause1,pause2,pause3 = false;
   
   //exaustion
   int e = int(random(10));
@@ -37,33 +37,13 @@ class Worker {
     .setNumberOfTickMarks(5)
     .setColorBackground(0)
     .showTickMarks(false);
-    
-  checkbox = cp5.addCheckBox("checkBox"+index)
-                .setPosition(500, height-400)
-                .setColorForeground(color(0))
-                .setColorBackground(color(0))
-                .setColorActive(color(#03a9f4))
-                .setColorLabel(color(255))
-                .setSize(40, 40)
-                .setItemsPerRow(1)
-                .setSpacingColumn(80)
-                .setSpacingRow(20)
-                .addItem("1"+index, 0)
-                .addItem("2"+index, 50)
-                .addItem("3"+index, 100)
-                ;
-                
-    
-    cp5.getGroup("checkBox"+index).hide();
+ 
     cp5.getController("sliderMoney"+index).hide();
   }
   
   void work(){
     if (e>=255){
       tooTired=true;
-    }
-    if (pause){
-      e--;
     }
     
     if (m>=255){
@@ -92,6 +72,7 @@ class Worker {
  }
  pos= int(f);
  //arduino.servoWrite(servo, pos);
+    
  }
  void showWork(){
  //Motivation umrechen für Balken
@@ -167,9 +148,65 @@ void moreInfo(){
   textAlign(LEFT);
   textSize(42);
   cp5.getController("sliderMoney"+index).show();
-  cp5.getGroup("checkBox"+index).show();
+  
+  fill(0);
+  rect(500,height-400,40,40);
+  rect(500,height-300,40,40);
+  rect(500,height-200,40,40);
+  
+  if (mouseX>=500 && mouseX<=500+40 && mouseY>=height-400 && mouseY<=height-400+40){
+    if (mousePressed && pause1==true){
+        fill(0);
+        rect(500,height-400,40,40);
+        pause1=false;
+      }
+      if (mousePressed&&pause1==false){
+        fill(#03a9f4);
+        rect(500,height-400,40,40);
+        pause1=true;
+      }
+  }
+  
+  if (mouseX>=500 && mouseX<=500+40 && mouseY>=height-300 && mouseY<=height-300+40){
+    if (mousePressed && pause1==true){
+        fill(0);
+        rect(500,height-300,40,40);
+        pause2=false;
+      }
+      if (mousePressed&&pause2==false){
+        fill(#03a9f4);
+        rect(500,height-300,40,40);
+        pause2=true;
+      }
+  }
+  
+    if (mouseX>=500 && mouseX<=500+40 && mouseY>=height-200 && mouseY<=height-200+40){
+    if (mousePressed && pause1==true){
+        fill(0);
+        rect(500,height-200,40,40);
+        pause3=false;
+      }
+      if (mousePressed&&pause3==false){
+        fill(#03a9f4);
+        rect(500,height-200,40,40);
+        pause3=true;
+      }
+  }
+  fill(0);
+  textFont(font, 24);
+  if (pause1){
+    text("I work at morning",580,height-370);
+  }
+  if(pause2){
+    text("I work at noon",580,height-270);
+  }
+  if(pause3){
+    text("I work at evening",580,height-170);
+  }
   
 //***General Infos****//
+fill(0);
+textFont(font,48);
   text("Hi, I'm "+names[index],10,50);
     fill(#03a9f4);
       text("My Motivation is at "+m,10,100);
@@ -181,6 +218,7 @@ void moreInfo(){
       text("I have "+pocket+"$ in my Pocket",10,250);
       
 //**Control Infos**//
+
   textSize(20);
   fill(0);
   text("I earn "+round(cp5.getController("sliderMoney"+index).getValue())+"$ per minute",200,500);
@@ -193,7 +231,6 @@ void moreInfo(){
   {
     infolayer=false;
     cp5.getController("sliderMoney"+index).hide();
-    cp5.getGroup("checkBox"+index).hide();
   }
   }
   else {
