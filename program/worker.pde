@@ -8,8 +8,7 @@ class Worker {
   };
   int index;
   boolean tooTired =false;
-  boolean work2,work3 = false;
-  boolean work1=true;
+  boolean work=true;
   boolean pause;
   
   //exaustion
@@ -33,9 +32,10 @@ class Worker {
   
   void init(){
     slider = cp5.addSlider("sliderMoney"+index)
-    .setPosition(100,height-400)
+    .setPosition(100,height-500)
     .setSize(80,300)
     .setRange(0,5)
+    .setValue(1)
     .setNumberOfTickMarks(5)
     .setColorBackground(0)
     .showTickMarks(false);
@@ -44,18 +44,21 @@ class Worker {
   }
   
   void work(){
-    
-    if (work1==false && work2==false && work3==false){
+
+
+    if (work==false){
       pause=true;
     }
     if (pause){
-      work1=false;
-      work2=false;
-      work3=false;
-      e=int((e-1)/frameRate);
+      work=false;
+      e--;
     }
-    if (work1 && second()>=0 || work2 && second()>=20 || work3 && second()>=40){
-      
+    if (e<0){
+      e=0;
+    }
+    
+    if (work){
+
       if (e>=255){
         tooTired=true;
       }
@@ -63,7 +66,7 @@ class Worker {
       if (m>=255){
         m=255;
       }
-   if (m>=0 && e<=255){ //wenn motivation über 40 und die exhaustion zu viel
+   if (m>=40 || e>=255){ //wenn motivation über 40 oder die exhaustion zu viel
     f=f+a;
     if (f >=180){
       a=(tempo*-1);
@@ -112,11 +115,12 @@ void showWork(){
  fill(#259b24);
  rect(174,e1,75,e2);
  textAlign(CENTER);
- if (tooTired){
+ if (tooTired||pause){
   fill(255,255,255,200);
   rect(0,40,250,130);
 }
 fill(0);
+textFont(font20, 20);
 text(names[index],250/2,200);
 popMatrix();
 mouseInteraction();
@@ -159,90 +163,62 @@ void moreInfo(){
   translate(0,0);
   //background(#e6e6e6);
   background(255);
-  textFont(font, 48);
+  textFont(font48, 48);
   textAlign(LEFT);
   textSize(42);
   cp5.getController("sliderMoney"+index).show();
   
-  fill(0);
-  rect(500,height-400,40,40);
-  rect(500,height-330,40,40);
-  rect(500,height-260,40,40);
-  rect(500,height-190,40,40);
+  fill(#e74c3c);
+  rect(600,height-500,40,40);
+  fill(#2ecc71);
+  rect(600,height-430,40,40);
   
-  if (mouseX>=500 && mouseX<=500+40 && mouseY>=height-400 && mouseY<=height-400+40){
-    if (mousePressed && work1==false){
+  if (mouseX>=600 && mouseX<=600+40 && mouseY>=height-500 && mouseY<=height-500+40){
+    if (mousePressed && work==false){
       fill(#00b6ea);
-      rect(500,height-400,40,40);
+      rect(600,height-500,40,40);
       pause=false;
-      work1=true;
-      work2=false;
-      work3=false;
+      work=true;
     }
   }
   
-  if (mouseX>=500 && mouseX<=500+40 && mouseY>=height-330 && mouseY<=height-330+40){
-    if (mousePressed && work2==false){
+  if (mouseX>=600 && mouseX<=600+40 && mouseY>=height-430 && mouseY<=height-430+40){
+    if (mousePressed && work==true){
       fill(#00b6ea);
-      rect(500,height-330,40,40);
-      pause=false;
-      work1=false;
-      work2=true;
-      work3=false;
-    }
-  }
-  
-  if (mouseX>=500 && mouseX<=500+40 && mouseY>=height-260 && mouseY<=height-260+40){
-    if (mousePressed && work3==false){
-      fill(#00b6ea);
-      rect(500,height-260,40,40);
-      pause=false;
-      work1=false;
-      work2=false;
-      work3=true;
-    }
-  }
-  
-    if (mouseX>=500 && mouseX<=500+40 && mouseY>=height-190 && mouseY<=height-190+40){
-    if (mousePressed && pause==false){
-      fill(#00b6ea);
-      rect(500,height-190,40,40);
+      rect(600,height-430,40,40);
       pause=true;
+      work=false;
     }
   }
   fill(0);
-  textFont(font, 24);
-  if (work1){
-    text("I work at morning",580,height-370);
+  textFont(font20, 24);
+  if (work){
+    text("I Work",680,height-470);
   }
-  if(work2){
-    text("I work at noon",580,height-300);
+  
+  if (work==false && pause==true){
+    text("I make a pause",680,height-400);
   }
-  if(work3){
-    text("I work at evening",580,height-235);
-  }
-  if (work1==false && work2 ==false && work3==false){
-    text("I make a pause",580,height-270);
-  }
+
   
 //***General Infos****//
 fill(0);
-textFont(font,48);
-text("Hi, I'm "+names[index],10,50);
+textFont(font48,48);
+text("Hi, I'm "+names[index],100,150);
 fill(#03a9f4);
-text("My Motivation is at "+m,10,100);
+text("My Motivation is at "+m,100,230);
 fill(#ff5722);
-text("My Tempo is "+tempo,10,150);
+text("My Tempo is "+tempo,100,310);
 fill(#259b24);
-text("My Exhaustion is at "+e,10,200);
+text("My Exhaustion is at "+e,100,390);
 fill(#00bcd4);
-text("I have "+pocket+"$ in my Pocket",10,250);
+text("I have "+pocket+"$ in my Pocket",100,470);
 
 //**Control Infos**//
 
 textSize(20);
 fill(0);
-text("I earn "+round(cp5.getController("sliderMoney"+index).getValue())+"$ per minute",200,500);
+text("I earn "+round(cp5.getController("sliderMoney"+index).getValue())+"$ per minute",220,height-350);
 //**This closes the Layer**//
 if(mouseX>=width-60 && mouseX<=(width-60)+80 && mouseY>=0 && mouseY <=60){
   textSize(42);
