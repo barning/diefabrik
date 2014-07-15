@@ -66,7 +66,7 @@ class Worker {
       if (m>=255){
         m=255;
       }
-   if (m>=40 || e>=255){ //wenn motivation über 40 oder die exhaustion zu viel
+   if (m>=40 || e<=250){ //wenn motivation über 40 oder die exhaustion zu viel
     f=f+a;
     if (f >=180){
       a=(tempo*-1);
