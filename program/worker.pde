@@ -88,7 +88,7 @@ class Worker {
    done =false;
  }
  pos= int(f);
- //arduino.servoWrite(servo, pos);
+ arduino.servoWrite(servo, pos);
 }
 
 }

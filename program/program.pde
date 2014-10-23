@@ -52,13 +52,17 @@ void setup() {
   worker8.init();
   worker9.init();
   
-  /*
   arduino = new Arduino(this, Arduino.list()[7], 57600);
-  arduino.pinMode(7, Arduino.SERVO);
-  arduino.pinMode(6, Arduino.SERVO);
-  arduino.pinMode(5, Arduino.SERVO);
+  arduino.pinMode(0, Arduino.SERVO);
+  arduino.pinMode(1, Arduino.SERVO);
+  arduino.pinMode(2, Arduino.SERVO);
+  arduino.pinMode(3, Arduino.SERVO);
   arduino.pinMode(4, Arduino.SERVO);
-  */
+  arduino.pinMode(5, Arduino.SERVO);
+  arduino.pinMode(6, Arduino.SERVO);
+  arduino.pinMode(7, Arduino.SERVO);
+  arduino.pinMode(8, Arduino.SERVO);
+
 }
 
 void draw(){
